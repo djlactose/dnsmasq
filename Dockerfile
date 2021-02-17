@@ -12,7 +12,8 @@ WORKDIR /root
 COPY hosts /root/hosts
 COPY run.sh /root/bin/run.sh
 
-RUN apk add dnsmasq 
+RUN apk add dnsmasq && \
+chmod +x /root/bin/run.sh
 
 #ENTRYPOINT dnsmasq --bind-interfaces --cache-size=1500 --no-daemon --addn-hosts=/root/hosts
 ENTRYPOINT /root/bin/run.sh
