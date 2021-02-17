@@ -2,7 +2,8 @@ FROM alpine
 
 ENV Lookup_DNS=8.8.8.8
 
-EXPOSE 53
+EXPOSE 53/TCP
+EXPOSE 53/UDP
 
 VOLUME /root
 
