@@ -14,4 +14,4 @@ RUN apk --no-cache add dnsmasq
 
 HEALTHCHECK CMD exit $(nslookup www.google.com localhost|grep -c "timed out")
 
-ENTRYPOINT dnsmasq --bind-interfaces --cache-size=1500 --no-daemon --addn-hosts=/root/hosts
+ENTRYPOINT dnsmasq --bind-interfaces --cache-size=1500 --dns-forward-max=1024 --no-daemon --addn-hosts=/root/hosts
