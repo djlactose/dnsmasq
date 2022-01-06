@@ -4,14 +4,16 @@ FROM alpine
 EXPOSE 53/TCP
 EXPOSE 53/UDP
 
-VOLUME /root
+VOLUME /root/data/
 
-WORKDIR /root
+WORKDIR /root/data/
 
-COPY hosts /root/hosts
+COPY hosts /root/data/hosts
+COPY run.sh /root/bin/run.sh
 
-RUN apk --no-cache add dnsmasq
+RUN apk --no-cache add dnsmasq && \
+chmod 700 /root/bin/run.sh
 
 HEALTHCHECK CMD exit $(nslookup www.google.com localhost|grep -c "timed out")
 
-ENTRYPOINT dnsmasq --bind-interfaces --cache-size=1500 --dns-forward-max=1024 --no-daemon --addn-hosts=/root/hosts
+ENTRYPOINT /root/bin/run.sh
