@@ -14,6 +14,6 @@ COPY run.sh /root/bin/run.sh
 RUN apk --no-cache add dnsmasq && \
 chmod 700 /root/bin/run.sh
 
-HEALTHCHECK CMD exit $(nslookup www.google.com localhost|grep -c "timed out")
+HEALTHCHECK CMD exit $(nslookup localhost localhost|grep -c "timed out")
 
 ENTRYPOINT /root/bin/run.sh
