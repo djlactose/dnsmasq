@@ -4,6 +4,8 @@ FROM alpine
 EXPOSE 53/TCP
 EXPOSE 53/UDP
 
+ENV Debug=false
+
 VOLUME /root/data/
 
 WORKDIR /root/data/
