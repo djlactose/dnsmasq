@@ -10,13 +10,13 @@ VOLUME /etc/dnsmasq.d/
 
 WORKDIR /etc/dnsmasq.d/
 
-COPY hosts /etc/dnsmasq.d/hosts
 COPY run.sh /root/bin/run.sh
 COPY app.py /root/web/app.py
-COPY templates/index.html /root/web/templates/index.html
+COPY templates/ /root/web/templates/
 
-RUN apk --no-cache add py3-flask py3-gunicorn dnsmasq && \
-chmod 700 /root/bin/run.sh
+RUN apk --no-cache add py3-passlib py3-flask py3-gunicorn py3-flask-sqlalchemy dnsmasq && \
+chmod 700 /root/bin/run.sh && \
+touch /etc/dnsmasq.d/hosts
 
 HEALTHCHECK CMD exit $(nslookup localhost localhost|grep -c "timed out")
 
